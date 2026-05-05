@@ -4,12 +4,12 @@ An interactive Leaflet map showing partner schools collaborating with Pädagogis
 
 ## Features
 
-✨ **Interactive Map**
+**Interactive Map**
 - Centered on Ludwigsburg, Germany
 - OpenStreetMap base layer
 - Smooth zoom and pan controls
 
-📍 **School Markers**
+**School Markers**
 - 8 partner schools marked with colored pins
 - Different colors by school type:
   - 🔴 Red: Primary Schools
@@ -17,17 +17,17 @@ An interactive Leaflet map showing partner schools collaborating with Pädagogis
   - 🟢 Teal: Secondary Schools
   - 🟠 Light Salmon: Vocational Schools
 
-🔍 **Search & Filter**
+**Search & Filter**
 - Search schools by name, address, or type
 - Real-time filtering as you type
 - Clear button to reset search
 
-📦 **Marker Clustering**
+**Marker Clustering**
 - Automatic clustering of nearby markers
 - Click to expand clusters
 - Smooth zoom animations
 
-📋 **Rich Popups**
+**Rich Popups**
 - School name and type
 - Full address with contact info
 - Website links
@@ -57,14 +57,6 @@ An interactive Leaflet map showing partner schools collaborating with Pädagogis
 3. The map will load immediately
 
 No build process or server required!
-
-## GitHub Pages Deployment
-
-1. Create a GitHub repository
-2. Push this code to the repository
-3. Go to repository Settings → Pages
-4. Select `main` (or `master`) branch as source
-5. Your map will be live at: `https://[username].github.io/[repo-name]/`
 
 ## TYPO3 Integration
 
