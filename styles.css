@@ -1,0 +1,201 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f5f5f5;
+    color: #333;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    overflow: hidden;
+}
+
+header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 30px;
+    text-align: center;
+}
+
+header h1 {
+    font-size: 2em;
+    margin-bottom: 10px;
+}
+
+header p {
+    font-size: 1.1em;
+    opacity: 0.9;
+}
+
+.search-box {
+    padding: 20px 30px;
+    display: flex;
+    gap: 10px;
+    background: #f9f9f9;
+    border-bottom: 1px solid #eee;
+}
+
+.search-box input {
+    flex: 1;
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1em;
+    transition: border-color 0.3s;
+}
+
+.search-box input:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 5px rgba(102, 126, 234, 0.3);
+}
+
+.search-box button {
+    padding: 12px 20px;
+    background: #667eea;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.3s;
+}
+
+.search-box button:hover {
+    background: #764ba2;
+}
+
+#map {
+    width: 100%;
+    height: 600px;
+    position: relative;
+}
+
+.legend {
+    padding: 20px 30px;
+    background: #f9f9f9;
+    border-top: 1px solid #eee;
+}
+
+.legend h3 {
+    margin-bottom: 15px;
+    font-size: 1.1em;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    gap: 10px;
+}
+
+.legend-marker {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 2px solid white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.legend-marker.primary {
+    background: #FF6B6B;
+}
+
+.legend-marker.secondary {
+    background: #4ECDC4;
+}
+
+.legend-marker.gymnasium {
+    background: #45B7D1;
+}
+
+.legend-marker.vocational {
+    background: #FFA07A;
+}
+
+/* Leaflet popup customization */
+.leaflet-popup-content-wrapper {
+    border-radius: 8px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.2);
+}
+
+.popup-content {
+    font-size: 0.95em;
+    line-height: 1.6;
+}
+
+.popup-content h3 {
+    color: #667eea;
+    margin-bottom: 10px;
+    font-size: 1.1em;
+}
+
+.popup-content p {
+    margin-bottom: 8px;
+}
+
+.popup-content a {
+    color: #667eea;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.popup-content a:hover {
+    text-decoration: underline;
+}
+
+.popup-type {
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 12px;
+    font-size: 0.85em;
+    background: #f0f0f0;
+    color: #666;
+    margin-bottom: 8px;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    header {
+        padding: 20px;
+    }
+    
+    header h1 {
+        font-size: 1.5em;
+    }
+    
+    .search-box {
+        flex-direction: column;
+        padding: 15px;
+    }
+    
+    #map {
+        height: 400px;
+    }
+    
+    .legend {
+        padding: 15px;
+    }
+}
+
+/* Marker cluster customization */
+.marker-cluster {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: 2px solid white;
+    border-radius: 50%;
+}
+
+.marker-cluster span {
+    color: white;
+    font-weight: bold;
+    font-size: 13px;
+}
