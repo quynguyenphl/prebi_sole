@@ -111,7 +111,3 @@ Edit `styles.css` for colors, fonts, and layout.
 ## License
 
 Creative Commons Attribution 4.0 International
-
-## Author
-
-Created for Pädagogische Hochschule Ludwigsburg

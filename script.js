@@ -13,6 +13,7 @@ const markerClusterGroup = L.markerClusterGroup();
 // Store all markers for filtering
 let allMarkers = {};
 let filteredMarkers = [];
+let selectedTypes = new Set(['primary', 'secondary', 'gymnasium', 'vocational']);
 
 /**
  * Create custom marker icon
@@ -89,34 +90,85 @@ function addMarkers() {
 }
 
 /**
- * Filter schools by search term
+ * Filter schools by search term and type
  */
 function filterSchools(searchTerm) {
     const term = searchTerm.toLowerCase().trim();
     
     // Clear all markers
     markerClusterGroup.clearLayers();
+    filteredMarkers = [];
     
-    if (term === '') {
-        // Show all markers
-        Object.values(allMarkers).forEach(item => {
+    // Filter by search term and type
+    Object.values(allMarkers).forEach(item => {
+        const school = item.school;
+        
+        // Check if type is selected
+        const typeMatches = selectedTypes.has(school.type);
+        
+        // Check if search term matches
+        let searchMatches = true;
+        if (term !== '') {
+            searchMatches = 
+                school.name.toLowerCase().includes(term) ||
+                school.address.toLowerCase().includes(term) ||
+                school.type.toLowerCase().includes(term) ||
+                school.description.toLowerCase().includes(term);
+        }
+        
+        // Add marker if both conditions are met
+        if (typeMatches && searchMatches) {
             markerClusterGroup.addLayer(item.marker);
-        });
+            filteredMarkers.push(school);
+        }
+    });
+    
+    // Update results list
+    updateResultsList();
+}
+
+/**
+ * Update results list display
+ */
+function updateResultsList() {
+    const resultsList = document.getElementById('resultsList');
+    
+    if (filteredMarkers.length === 0) {
+        resultsList.innerHTML = '<div class="results-empty">No schools match your filters.</div>';
         return;
     }
     
-    // Filter by search term
-    Object.values(allMarkers).forEach(item => {
-        const school = item.school;
-        const matches = 
-            school.name.toLowerCase().includes(term) ||
-            school.address.toLowerCase().includes(term) ||
-            school.type.toLowerCase().includes(term) ||
-            school.description.toLowerCase().includes(term);
-        
-        if (matches) {
-            markerClusterGroup.addLayer(item.marker);
-        }
+    // Sort by name
+    const sortedSchools = [...filteredMarkers].sort((a, b) => a.name.localeCompare(b.name));
+    
+    resultsList.innerHTML = sortedSchools.map(school => {
+        const color = typeColors[school.type];
+        return `
+            <div class="result-card" data-school-id="${school.id}">
+                <div class="result-card-header">
+                    <div class="result-card-icon" style="background-color: ${color};"></div>
+                    <h4>${school.name}</h4>
+                </div>
+                <div style="margin-bottom: 8px;">
+                    <span class="result-card-type">${capitalizeFirst(school.type)}</span>
+                </div>
+                <div class="result-card-content">
+                    <p><strong>📍</strong> ${school.address}</p>
+                    <p><strong>📞</strong> <a href="tel:${school.contact}" style="color: #667eea; text-decoration: none;">${school.contact}</a></p>
+                    <p><strong>🌐</strong> <a href="${school.website}" target="_blank" style="color: #667eea; text-decoration: none;">Website</a></p>
+                </div>
+            </div>
+        `;
+    }).join('');
+    
+    // Add click handlers to result cards
+    document.querySelectorAll('.result-card').forEach(card => {
+        card.addEventListener('click', () => {
+            const schoolId = parseInt(card.dataset.schoolId);
+            const marker = allMarkers[schoolId].marker;
+            marker.openPopup();
+            map.setView(marker.getLatLng(), 15);
+        });
     });
 }
 
@@ -132,6 +184,32 @@ document.getElementById('searchInput').addEventListener('keyup', (e) => {
  */
 document.getElementById('clearSearch').addEventListener('click', () => {
     document.getElementById('searchInput').value = '';
+    filterSchools('');
+});
+
+/**
+ * Type filter checkboxes handler
+ */
+document.querySelectorAll('.type-filter').forEach(checkbox => {
+    checkbox.addEventListener('change', (e) => {
+        if (e.target.checked) {
+            selectedTypes.add(e.target.value);
+        } else {
+            selectedTypes.delete(e.target.value);
+        }
+        filterSchools(document.getElementById('searchInput').value);
+    });
+});
+
+/**
+ * Clear filters button
+ */
+document.getElementById('clearFilters').addEventListener('click', () => {
+    document.querySelectorAll('.type-filter').forEach(checkbox => {
+        checkbox.checked = true;
+    });
+    document.getElementById('searchInput').value = '';
+    selectedTypes = new Set(['primary', 'secondary', 'gymnasium', 'vocational']);
     filterSchools('');
 });
 

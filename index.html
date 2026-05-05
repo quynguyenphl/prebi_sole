@@ -25,7 +25,39 @@
             <button id="clearSearch">Clear</button>
         </div>
         
+        <div class="filter-box">
+            <h3>Filter by School Type</h3>
+            <div class="filter-options">
+                <label class="filter-label">
+                    <input type="checkbox" class="type-filter" value="primary" checked>
+                    <span class="filter-marker primary"></span>
+                    <span>Primary Schools</span>
+                </label>
+                <label class="filter-label">
+                    <input type="checkbox" class="type-filter" value="secondary" checked>
+                    <span class="filter-marker secondary"></span>
+                    <span>Secondary Schools</span>
+                </label>
+                <label class="filter-label">
+                    <input type="checkbox" class="type-filter" value="gymnasium" checked>
+                    <span class="filter-marker gymnasium"></span>
+                    <span>Gymnasiums</span>
+                </label>
+                <label class="filter-label">
+                    <input type="checkbox" class="type-filter" value="vocational" checked>
+                    <span class="filter-marker vocational"></span>
+                    <span>Vocational Schools</span>
+                </label>
+                <button id="clearFilters" class="clear-filters-btn">Reset Filters</button>
+            </div>
+        </div>
+        
         <div id="map"></div>
+        
+        <div class="results-section">
+            <h3>Filtered Results</h3>
+            <div id="resultsList" class="results-list"></div>
+        </div>
         
         <div class="legend">
             <h3>Legend</h3>
