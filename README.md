@@ -64,7 +64,7 @@ Embed the map in TYPO3 as an iframe:
 
 ```html
 <iframe 
-    src="https://[username].github.io/[repo-name]/" 
+    src="https://quynguyenphl.github.io/prebi_sole/" 
     width="100%" 
     height="700"
     style="border: none; border-radius: 8px;"
