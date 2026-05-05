@@ -58,6 +58,19 @@ An interactive Leaflet map showing partner schools collaborating with Pädagogis
 
 No build process or server required!
 
+### Clearing Cache After Updates
+
+If you've deployed updates and styles/features aren't displaying correctly:
+
+**Browser Cache:**
+- **Chrome/Edge:** Press `Ctrl+Shift+Delete` (Windows) or `Cmd+Shift+Delete` (Mac)
+- **Safari:** Develop → Empty Caches
+- Or do a **hard refresh:** `Ctrl+F5` (Windows) or `Cmd+Shift+R` (Mac)
+
+**GitHub Pages Cache:**
+- May take 5-10 minutes to refresh automatically
+- Use Ctrl+F5 for an immediate browser cache clear
+
 ## TYPO3 Integration
 
 Embed the map in TYPO3 as an iframe:
