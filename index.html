@@ -12,80 +12,62 @@
     
     <!-- Custom CSS -->
     <link rel="stylesheet" href="styles.css">
+
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"> 
+
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>PH Ludwigsburg - School Collaborations</h1>
-            <p>Partner schools and collaboration events</p>
-        </header>
-        
-        <div class="search-box">
-            <input type="text" id="searchInput" placeholder="Search schools...">
-            <button id="clearSearch">Clear</button>
-        </div>
-        
-        <div class="filter-box">
-            <h3>Filter by School Type</h3>
-            <div class="filter-options">
-                <label class="filter-label">
-                    <input type="checkbox" class="type-filter" value="primary" checked>
-                    <span class="filter-marker primary"></span>
-                    <span>Primary Schools</span>
-                </label>
-                <label class="filter-label">
-                    <input type="checkbox" class="type-filter" value="secondary" checked>
-                    <span class="filter-marker secondary"></span>
-                    <span>Secondary Schools</span>
-                </label>
-                <label class="filter-label">
-                    <input type="checkbox" class="type-filter" value="gymnasium" checked>
-                    <span class="filter-marker gymnasium"></span>
-                    <span>Gymnasiums</span>
-                </label>
-                <label class="filter-label">
-                    <input type="checkbox" class="type-filter" value="vocational" checked>
-                    <span class="filter-marker vocational"></span>
-                    <span>Vocational Schools</span>
-                </label>
-                <button id="clearFilters" class="clear-filters-btn">Reset Filters</button>
+        <div class="container">
+            <header>
+                <h1>PH Ludwigsburg - Kooperationspartner-Karte</h1>
+                <p>Interaktive Karte der Partnereinrichtungen und Kooperationen</p>
+            </header>
+            
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="Suche nach Namen, Adresse, Angebot..." aria-label="Suchfeld">
+                <button id="clearSearch" aria-label="Suchfeld löschen">Löschen</button>
+                <button id="exportBtn" class="action-btn export-btn" aria-label="Ergebnisse als CSV exportieren" title="Als CSV exportieren">Exportieren</button>
+                <button id="shareBtn" class="action-btn share-btn" aria-label="Ergebnisse teilen" title="Link teilen">Teilen</button>
             </div>
-        </div>
-        
-        <div id="map"></div>
-        
+            <div class="main-layout">
+                <aside class="filter-sidebar">
+                    <div class="filter-box">
+                        <h3>Filter nach Kategorie</h3>
+                        <div class="filter-options">
+                            <!-- Dynamically populated by script.js -->
+                        </div>
+                    </div>
+
+                    <div class="filter-box">
+                        <h3>Filter nach SoLE-Kooperation</h3>
+                        <div class="cooperation-filter-options">
+                            <!-- Dynamically populated by script.js -->
+                        </div>
+                    </div>
+
+                    <div class="filter-controls">
+                        <button id="clearFilters" class="clear-filters-btn">Alle Filter zurücksetzen</button>
+                    </div>
+                </aside>
+
+                <main class="map-panel">
+                    <div id="map"></div>
+                </main>
+            </div>
         <div class="results-section">
-            <h3>Filtered Results</h3>
+            <h3>Filterergebnisse</h3>
             <div id="resultsList" class="results-list"></div>
         </div>
-        
-        <div class="legend">
-            <h3>Legend</h3>
-            <div class="legend-item">
-                <span class="legend-marker primary"></span>
-                <span>Primary School</span>
-            </div>
-            <div class="legend-item">
-                <span class="legend-marker secondary"></span>
-                <span>Secondary School</span>
-            </div>
-            <div class="legend-item">
-                <span class="legend-marker gymnasium"></span>
-                <span>Gymnasium</span>
-            </div>
-            <div class="legend-item">
-                <span class="legend-marker vocational"></span>
-                <span>Vocational School</span>
-            </div>
-        </div>
-    </div>
 
     <!-- Leaflet JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.1/leaflet.markercluster.min.js"></script>
     
     <!-- Custom Scripts -->
-    <script src="data.js"></script>
+    <!-- <script src="data.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

@@ -1,126 +1,233 @@
-# PH Ludwigsburg School Collaborations Map
+# PH Ludwigsburg – SoLE Kooperationspartner-Karte
 
-An interactive Leaflet map showing partner schools collaborating with Pädagogische Hochschule Ludwigsburg.
+Interactive map application for visualizing cooperation partners, educational institutions, and SoLE-related practice locations of Pädagogische Hochschule Ludwigsburg.
+
+The application is built with Leaflet and uses real Excel-based data transformed into map-ready JSON/JavaScript objects.
+
+---
 
 ## Features
 
-**Interactive Map**
-- Centered on Ludwigsburg, Germany
-- OpenStreetMap base layer
-- Smooth zoom and pan controls
+### Interactive Map
 
-**School Markers**
-- 8 partner schools marked with colored pins
-- Different colors by school type:
-  - 🔴 Red: Primary Schools
-  - 🔵 Blue: Gymnasiums
-  - 🟢 Teal: Secondary Schools
-  - 🟠 Light Salmon: Vocational Schools
+* Leaflet-based interactive map
+* OpenStreetMap tiles
+* Marker clustering
+* Responsive desktop/mobile layout
 
-**Search & Filter**
-- Search schools by name, address, or type
-- Real-time filtering as you type
-- Clear button to reset search
+### Real Data Pipeline
 
-**Marker Clustering**
-- Automatic clustering of nearby markers
-- Click to expand clusters
-- Smooth zoom animations
+* Excel (`.xlsx`) as single source of truth
+* Automatic transformation into `data.js`
+* Address geocoding with latitude/longitude generation
+* Local geocode caching
 
-**Rich Popups**
-- School name and type
-- Full address with contact info
-- Website links
-- Links to collaboration events
-- School description
+### Search & Filtering
 
-## Technologies
+Search by:
 
-- **Leaflet.js** - Interactive map library
-- **Leaflet.markercluster** - Marker clustering
-- **OpenStreetMap** - Base map tiles
-- **Vanilla JavaScript** - Interactivity
-- **CSS3** - Responsive design
+* Name
+* Address
+* Offer
+* Target group
+* Cooperation status
 
-## Files
+Filter by:
 
-- `index.html` - Main map page
-- `script.js` - Map logic and interactivity
-- `styles.css` - Styling and responsive design
-- `data.js` - School data and configuration
-- `README.md` - This file
+* Einrichtung/Projekt category
+* SoLE cooperation status
 
-## Local Development
+### PH Ludwigsburg Design
 
-1. Clone or download this repository
-2. Open `index.html` in a web browser
-3. The map will load immediately
+The interface is visually aligned with the corporate design of PH Ludwigsburg:
 
-No build process or server required!
+* institutional green color palette
+* structured academic layout
+* minimal UI
+* responsive desktop/mobile design
 
-### Clearing Cache After Updates
+### Export & Sharing
 
-If you've deployed updates and styles/features aren't displaying correctly:
+* Export filtered results as CSV
+* Share filtered map state via URL
 
-**Browser Cache:**
-- **Chrome/Edge:** Press `Ctrl+Shift+Delete` (Windows) or `Cmd+Shift+Delete` (Mac)
-- **Safari:** Develop → Empty Caches
-- Or do a **hard refresh:** `Ctrl+F5` (Windows) or `Cmd+Shift+R` (Mac)
+---
 
-**GitHub Pages Cache:**
-- May take 5-10 minutes to refresh automatically
-- Use Ctrl+F5 for an immediate browser cache clear
+# Project Structure
 
-## TYPO3 Integration
-
-Embed the map in TYPO3 as an iframe:
-
-```html
-<iframe 
-    src="https://quynguyenphl.github.io/prebi_sole/" 
-    width="100%" 
-    height="700"
-    style="border: none; border-radius: 8px;"
-    title="PH Ludwigsburg School Collaborations Map"
->
-</iframe>
+```text
+.
+├── index.html
+├── styles.css
+├── script.js
+├── data.js
+├── PraxisstellenSoLE_Karte.xlsx
+├── geocode-cache.json
+├── package.json
+└── scripts
+    └── generate-data.js
 ```
 
-## Customization
+---
 
-### Adding Schools
-Edit `data.js` and add to the `schools` array:
+# Data Structure
 
-```javascript
+The application uses a normalized structure generated from Excel rows.
+
+Example:
+
+```js
 {
-    id: 9,
-    name: "Your School",
-    type: "gymnasium", // primary, secondary, gymnasium, vocational
-    lat: 48.XXXX,
-    lng: 8.XXXX,
-    address: "Street Address",
-    contact: "+49 7141 XXX",
-    website: "https://example.com",
-    event: "https://events-page",
-    description: "School description"
+  id: 1,
+  name: "KiFaZ Poppenweiler",
+  category: "Kinder- und Familienzentrum",
+  targetGroup: "(Klein-)Kinder, Familien",
+  offer: "Offene Treffs, Betreuung, Kurse",
+  address: "Erdmannhäuserstraße 7, Ludwigsburg",
+  contactPerson: "Max Mustermann",
+  email: "example@example.de",
+  phone: "07141 123456",
+  cooperationStatus: "Seminarkooperation",
+  details: "Zusätzliche Informationen",
+  lat: 48.8974,
+  lng: 9.1916
 }
 ```
 
-### Changing Colors
-Edit `typeColors` in `data.js`:
+---
 
-```javascript
-const typeColors = {
-    primary: "#FF6B6B",
-    secondary: "#4ECDC4",
-    gymnasium: "#45B7D1",
-    vocational: "#FFA07A"
-};
+# Excel Template
+
+The generator expects the following columns:
+
+| Excel Column                     | Description        |
+| -------------------------------- | ------------------ |
+| Art der Einrichtung/des Projekts | Category           |
+| Name                             | Institution name   |
+| Zielgruppe                       | Target group       |
+| Angebot                          | Offer/services     |
+| Adresse                          | Postal address     |
+| Kontaktperson                    | Contact person     |
+| Mail                             | Email              |
+| Telefon                          | Phone number       |
+| SoLE-Kooperation                 | Cooperation status |
+| Was                              | Additional details |
+
+---
+
+# Installation
+
+## 1. Clone repository
+
+```bash
+git clone https://github.com/quynguyenphl/prebi_sole.git
+cd prebi_sole
 ```
 
-### Map Styling
-Edit `styles.css` for colors, fonts, and layout.
+## 2. Install dependencies
 
-## License
+```bash
+npm install
+```
 
-Creative Commons Attribution 4.0 International
+---
+
+# Generate Data from Excel
+
+Run:
+
+```bash
+npm run generate-data
+```
+
+This will:
+
+1. Read the Excel file
+2. Validate rows
+3. Geocode addresses
+4. Cache coordinates
+5. Generate `data.js`
+
+---
+
+# Geocoding
+
+The project uses OpenStreetMap Nominatim for address geocoding.
+
+Workflow:
+
+```text
+Excel Address
+    ↓
+Geocoding
+    ↓
+Latitude / Longitude
+    ↓
+data.js
+```
+
+To avoid repeated requests, coordinates are cached in:
+
+```text
+geocode-cache.json
+```
+
+---
+
+# Running the Application
+
+Open locally with:
+
+```bash
+npx serve
+```
+
+or use VSCode Live Server.
+
+Then visit:
+
+```text
+http://localhost:3000
+```
+
+---
+
+# Layout
+
+Desktop layout:
+
+```text
+Header
+Search
+Filters + Map
+Results
+```
+
+Mobile layout:
+
+```text
+Header
+Search
+Filters
+Map
+Results
+```
+
+---
+
+# Technologies
+
+* Leaflet
+* Leaflet MarkerCluster
+* OpenStreetMap
+* Node.js
+* XLSX
+* Font Awesome
+
+---
+
+# Credits
+
+Developed for the SoLE cooperation partner mapping initiative at Pädagogische Hochschule Ludwigsburg.
+
+Map data © OpenStreetMap contributors.
