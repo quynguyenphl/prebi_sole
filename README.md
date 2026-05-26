@@ -20,8 +20,7 @@ The application is built with Leaflet and uses CSV-based data maintained in Exce
 
 * Excel as single source of truth
 * Simple CSV workflow
-* No Node.js or build pipeline required
-* Easy maintenance by student assistants (Hiwis)
+* Easy maintenance
 
 ## Search & Filtering
 
