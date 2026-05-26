@@ -2,27 +2,28 @@
 
 Interactive map application for visualizing cooperation partners, educational institutions, and SoLE-related practice locations of Pädagogische Hochschule Ludwigsburg.
 
-The application is built with Leaflet and uses real Excel-based data transformed into map-ready JSON/JavaScript objects.
+The application is built with Leaflet and uses CSV-based data maintained in Excel.
 
 ---
 
-## Features
+# Features
 
-### Interactive Map
+## Interactive Map
 
 * Leaflet-based interactive map
 * OpenStreetMap tiles
 * Marker clustering
 * Responsive desktop/mobile layout
+* Category-specific icons
 
-### Real Data Pipeline
+## Data Management
 
-* Excel (`.xlsx`) as single source of truth
-* Automatic transformation into `data.js`
-* Address geocoding with latitude/longitude generation
-* Local geocode caching
+* Excel as single source of truth
+* Simple CSV workflow
+* No Node.js or build pipeline required
+* Easy maintenance by student assistants (Hiwis)
 
-### Search & Filtering
+## Search & Filtering
 
 Search by:
 
@@ -37,16 +38,16 @@ Filter by:
 * Einrichtung/Projekt category
 * SoLE cooperation status
 
-### PH Ludwigsburg Design
+## PH Ludwigsburg Design
 
-The interface is visually aligned with the corporate design of PH Ludwigsburg:
+The interface follows the visual direction of the PH Ludwigsburg corporate design:
 
 * institutional green color palette
 * structured academic layout
+* responsive interface
 * minimal UI
-* responsive desktop/mobile design
 
-### Export & Sharing
+## Export & Sharing
 
 * Export filtered results as CSV
 * Share filtered map state via URL
@@ -60,141 +61,179 @@ The interface is visually aligned with the corporate design of PH Ludwigsburg:
 ├── index.html
 ├── styles.css
 ├── script.js
-├── data.js
-├── PraxisstellenSoLE_Karte.xlsx
-├── geocode-cache.json
-├── package.json
-└── scripts
-    └── generate-data.js
+├── PraxisstellenSoLE_Karte.csv
+└── README.md
 ```
 
 ---
 
-# Data Structure
+# Data Workflow
 
-The application uses a normalized structure generated from Excel rows.
+The project uses a lightweight CSV workflow.
 
-Example:
-
-```js
-{
-  id: 1,
-  name: "KiFaZ Poppenweiler",
-  category: "Kinder- und Familienzentrum",
-  targetGroup: "(Klein-)Kinder, Familien",
-  offer: "Offene Treffs, Betreuung, Kurse",
-  address: "Erdmannhäuserstraße 7, Ludwigsburg",
-  contactPerson: "Max Mustermann",
-  email: "example@example.de",
-  phone: "07141 123456",
-  cooperationStatus: "Seminarkooperation",
-  details: "Zusätzliche Informationen",
-  lat: 48.8974,
-  lng: 9.1916
-}
+```text
+Excel Template
+    ↓
+Add coordinates
+    ↓
+Export as CSV UTF-8
+    ↓
+Upload to repository
+    ↓
+Map updates automatically
 ```
+
+No backend or build step is required.
 
 ---
 
 # Excel Template
 
-The generator expects the following columns:
+The Excel file must contain the following columns:
 
-| Excel Column                     | Description        |
-| -------------------------------- | ------------------ |
-| Art der Einrichtung/des Projekts | Category           |
-| Name                             | Institution name   |
-| Zielgruppe                       | Target group       |
-| Angebot                          | Offer/services     |
-| Adresse                          | Postal address     |
-| Kontaktperson                    | Contact person     |
-| Mail                             | Email              |
-| Telefon                          | Phone number       |
-| SoLE-Kooperation                 | Cooperation status |
-| Was                              | Additional details |
-
----
-
-# Installation
-
-## 1. Clone repository
-
-```bash
-git clone https://github.com/quynguyenphl/prebi_sole.git
-cd prebi_sole
-```
-
-## 2. Install dependencies
-
-```bash
-npm install
-```
+| Column                           | Description          |
+| -------------------------------- | -------------------- |
+| Art der Einrichtung/des Projekts | Institution category |
+| Name                             | Institution name     |
+| Zielgruppe                       | Target group         |
+| Angebot                          | Offer/services       |
+| Adresse                          | Full address         |
+| Kontaktperson                    | Contact person       |
+| Mail                             | Email                |
+| Telefon                          | Phone number         |
+| SoLE-Kooperation                 | Cooperation status   |
+| Was                              | Additional details   |
+| Lat                              | Latitude             |
+| Lng                              | Longitude            |
 
 ---
 
-# Generate Data from Excel
+# Adding Coordinates
 
-Run:
+Coordinates are added manually using Google Maps or OpenStreetMap.
 
-```bash
-npm run generate-data
-```
+## Option 1 — Google Maps
 
-This will:
+1. Open [Google Maps](https://maps.google.com?utm_source=chatgpt.com)
+2. Search for the address
+3. Right click the location
+4. Copy coordinates
+5. Paste into `Lat` and `Lng`
 
-1. Read the Excel file
-2. Validate rows
-3. Geocode addresses
-4. Cache coordinates
-5. Generate `data.js`
-
----
-
-# Geocoding
-
-The project uses OpenStreetMap Nominatim for address geocoding.
-
-Workflow:
+Example:
 
 ```text
-Excel Address
-    ↓
-Geocoding
-    ↓
-Latitude / Longitude
-    ↓
-data.js
+48.8974, 9.1916
 ```
 
-To avoid repeated requests, coordinates are cached in:
+becomes:
+
+| Lat     | Lng    |
+| ------- | ------ |
+| 48.8974 | 9.1916 |
+
+---
+
+## Option 2 — OpenStreetMap
+
+1. Open [OpenStreetMap](https://www.openstreetmap.org?utm_source=chatgpt.com)
+2. Search the address
+3. Right click → “Show address”
+4. Copy coordinates into Excel
+
+---
+
+# Important CSV Rules
+
+## Use Full Addresses
+
+Good:
 
 ```text
-geocode-cache.json
+Erdmannhäuserstraße 7, Ludwigsburg
 ```
+
+Avoid incomplete addresses.
+
+---
+
+## Every Row Must Have All Columns
+
+Even empty columns need separators.
+
+Correct:
+
+```text
+Kontakt;;48.9090;9.1772
+```
+
+Incorrect:
+
+```text
+Kontakt;48.9090;9.1772
+```
+
+---
+
+## Coordinates Must Use Decimal Points
+
+Correct:
+
+```text
+48.9090
+```
+
+Incorrect:
+
+```text
+48,9090
+```
+
+---
+
+# Export Excel as CSV
+
+In Excel:
+
+```text
+Datei → Speichern unter → CSV UTF-8
+```
+
+Save as:
+
+```text
+PraxisstellenSoLE_Karte.csv
+```
+
+Replace the existing CSV file in the repository.
 
 ---
 
 # Running the Application
 
-Open locally with:
+## Local Development
+
+Use a local web server.
+
+Example:
 
 ```bash
-npx serve
+python3 -m http.server 8000
 ```
 
-or use VSCode Live Server.
-
-Then visit:
+Then open:
 
 ```text
-http://localhost:3000
+http://localhost:8000
 ```
+
+Do not open `index.html` directly via double-click because CSV loading requires a local server.
 
 ---
 
 # Layout
 
-Desktop layout:
+## Desktop
 
 ```text
 Header
@@ -203,7 +242,7 @@ Filters + Map
 Results
 ```
 
-Mobile layout:
+## Mobile
 
 ```text
 Header
@@ -219,9 +258,8 @@ Results
 
 * Leaflet
 * Leaflet MarkerCluster
+* PapaParse
 * OpenStreetMap
-* Node.js
-* XLSX
 * Font Awesome
 
 ---
