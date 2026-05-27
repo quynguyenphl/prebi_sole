@@ -556,8 +556,15 @@ select:focus {
     }
 
     .search-box {
-        flex-direction: column;
-        padding: 18px;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .search-actions {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
     }
 
     .filter-box,
