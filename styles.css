@@ -567,6 +567,21 @@ select:focus {
     gap: 8px;
     }
 
+    .search-actions button {
+    width: 100%;
+    height: 48px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0;
+    margin: 0;
+
+    font-size: 0.9rem;
+    font-weight: 700;
+    }
+
     .filter-box,
     .sort-controls,
     .filter-controls,
