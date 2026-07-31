@@ -1,0 +1,5 @@
+plugin.tx_solemap_map {
+    view {
+        templateRootPaths.10 = EXT:sole_map/Resources/Private/Templates/
+    }
+}

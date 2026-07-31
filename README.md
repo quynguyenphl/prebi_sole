@@ -210,6 +210,14 @@ Replace the existing CSV file in the repository.
 
 # Running the Application
 
+## TYPO3 plugin
+
+An installable TYPO3 v12/v13 extension is available in `sole_map/`. It registers **SoLE Kooperationspartner-Karte** as a frontend plugin and packages the map, styles, JavaScript, and CSV data together.
+
+Installation, pre-production testing, network requirements, and the later data-update workflow are documented in `sole_map/README.md`.
+
+A step-by-step tutorial for readers who have never used TYPO3 is available in `sole_map/Documentation/LocalTypo3Tutorial.md`.
+
 ## Local Development
 
 Use a local web server.
@@ -268,3 +276,4 @@ Results
 Developed for the SoLE cooperation partner mapping initiative at Pädagogische Hochschule Ludwigsburg.
 
 Map data © OpenStreetMap contributors.
+# prebi_sole_plugin

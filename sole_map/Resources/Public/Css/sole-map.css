@@ -1,0 +1,316 @@
+.sole-map-app {
+    --sole-green: #2f6f3e;
+    --sole-green-dark: #245732;
+    --sole-green-light: #e7efe9;
+    --sole-bg: #f4f4f1;
+    --sole-white: #fff;
+    --sole-border: #d9d9d4;
+    --sole-text: #333;
+    --sole-muted: #666;
+    color: var(--sole-text);
+    background: var(--sole-white);
+    border: 1px solid var(--sole-border);
+    font-family: "Open Sans", "Helvetica Neue", sans-serif;
+    line-height: 1.5;
+    margin-inline: auto;
+    max-width: 1280px;
+    overflow: hidden;
+}
+
+.sole-map-app *,
+.sole-map-app *::before,
+.sole-map-app *::after {
+    box-sizing: border-box;
+}
+
+.sole-map-header {
+    border-top: 8px solid var(--sole-green);
+    border-bottom: 1px solid var(--sole-border);
+    padding: 36px;
+}
+
+.sole-map-header h2,
+.sole-map-header p,
+.sole-map-filter h3,
+.sole-map-results h3 {
+    margin-top: 0;
+}
+
+.sole-map-header h2 {
+    color: var(--sole-green);
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+    line-height: 1.15;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+
+.sole-map-header p {
+    color: var(--sole-muted);
+    margin-bottom: 0;
+}
+
+.sole-map-search {
+    align-items: stretch;
+    border-bottom: 1px solid var(--sole-border);
+    display: flex;
+    gap: 12px;
+    padding: 20px 36px;
+}
+
+.sole-map-search input {
+    border: 1px solid var(--sole-border);
+    flex: 1;
+    font: inherit;
+    min-width: 0;
+    padding: 11px 14px;
+}
+
+.sole-map-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.sole-map-app button,
+.sole-map-app select {
+    font: inherit;
+}
+
+.sole-map-actions button,
+.sole-map-filter-reset button {
+    background: var(--sole-green);
+    border: 0;
+    color: var(--sole-white);
+    cursor: pointer;
+    font-weight: 700;
+    padding: 11px 16px;
+}
+
+.sole-map-actions button:hover,
+.sole-map-filter-reset button:hover {
+    background: var(--sole-green-dark);
+}
+
+.sole-map-layout {
+    display: grid;
+    grid-template-columns: minmax(250px, 320px) minmax(0, 1fr);
+}
+
+.sole-map-sidebar {
+    background: var(--sole-bg);
+    border-right: 1px solid var(--sole-border);
+}
+
+.sole-map-filter {
+    border-bottom: 1px solid var(--sole-border);
+    padding: 22px 26px;
+}
+
+.sole-map-filter h3,
+.sole-map-results h3 {
+    color: var(--sole-green);
+    font-size: 1rem;
+    text-transform: uppercase;
+}
+
+.sole-map-filter [data-role$="filters"] {
+    display: grid;
+    gap: 10px;
+}
+
+.sole-map-filter-option {
+    align-items: center;
+    cursor: pointer;
+    display: grid;
+    font-size: .925rem;
+    gap: 8px;
+    grid-template-columns: auto auto 1fr;
+}
+
+.sole-map-filter-option input {
+    accent-color: var(--sole-green);
+    height: 18px;
+    margin: 0;
+    width: 18px;
+}
+
+.sole-map-swatch {
+    border-radius: 50%;
+    display: block;
+    height: 14px;
+    width: 14px;
+}
+
+.sole-map-status-swatch {
+    background: var(--sole-green) !important;
+}
+
+.sole-map-filter-reset {
+    padding: 18px 26px;
+}
+
+.sole-map-filter-reset button {
+    width: 100%;
+}
+
+.sole-map-canvas {
+    height: 560px;
+    width: 100%;
+}
+
+.sole-map-results {
+    border-top: 1px solid var(--sole-border);
+    padding: 28px 36px 36px;
+}
+
+.sole-map-results-list {
+    display: grid;
+    gap: 16px;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr));
+}
+
+.sole-map-sort {
+    align-items: center;
+    background: var(--sole-bg);
+    border: 1px solid var(--sole-border);
+    display: flex;
+    gap: 16px;
+    grid-column: 1 / -1;
+    justify-content: space-between;
+    padding: 12px 14px;
+}
+
+.sole-map-sort select {
+    background: var(--sole-white);
+    border: 1px solid var(--sole-border);
+    margin-left: 8px;
+    padding: 7px;
+}
+
+.sole-map-result {
+    align-items: start;
+    background: var(--sole-white);
+    border: 1px solid var(--sole-border);
+    border-left: 5px solid var(--result-color);
+    color: var(--sole-muted);
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    padding: 16px;
+    text-align: left;
+}
+
+.sole-map-result:hover {
+    background: var(--sole-green-light);
+    border-color: var(--sole-green);
+}
+
+.sole-map-result-title {
+    color: var(--sole-green-dark);
+    font-size: 1.05rem;
+    font-weight: 800;
+}
+
+.sole-map-tags {
+    background: var(--sole-green-light);
+    color: var(--sole-green-dark);
+    font-size: .78rem;
+    font-weight: 700;
+    padding: 3px 7px;
+}
+
+.sole-map-empty,
+.sole-map-error {
+    grid-column: 1 / -1;
+    padding: 24px;
+    text-align: center;
+}
+
+.sole-map-error {
+    background: #f9e7e5;
+    color: #842d27;
+}
+
+.sole-map-marker {
+    background: var(--marker-color);
+    border: 3px solid #fff;
+    border-radius: 50% 50% 50% 0;
+    box-shadow: 0 2px 6px rgb(0 0 0 / 30%);
+    display: block;
+    height: 30px;
+    transform: rotate(-45deg);
+    width: 30px;
+}
+
+.sole-map-popup h3 {
+    color: var(--sole-green);
+    margin: 0 0 6px;
+}
+
+.sole-map-popup > span {
+    background: var(--sole-green-light);
+    color: var(--sole-green-dark);
+    display: inline-block;
+    font-size: .8rem;
+    padding: 3px 7px;
+}
+
+.sole-map-popup p {
+    margin: 10px 0 0;
+}
+
+.sole-map-app :is(input, button, select):focus-visible {
+    outline: 3px solid var(--sole-green);
+    outline-offset: 2px;
+}
+
+@media (max-width: 800px) {
+    .sole-map-header,
+    .sole-map-results {
+        padding: 24px 18px;
+    }
+
+    .sole-map-search {
+        display: grid;
+        padding: 18px;
+    }
+
+    .sole-map-actions {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .sole-map-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .sole-map-sidebar {
+        border-right: 0;
+    }
+
+    .sole-map-filter [data-role$="filters"] {
+        grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    }
+
+    .sole-map-canvas {
+        height: 440px;
+    }
+}
+
+@media (max-width: 460px) {
+    .sole-map-actions {
+        grid-template-columns: 1fr;
+    }
+
+    .sole-map-sort {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .sole-map-sort label,
+    .sole-map-sort select {
+        display: block;
+        margin: 5px 0 0;
+        width: 100%;
+    }
+}

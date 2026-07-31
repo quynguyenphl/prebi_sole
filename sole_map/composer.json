@@ -1,0 +1,21 @@
+{
+    "name": "ph-ludwigsburg/sole-map",
+    "type": "typo3-cms-extension",
+    "description": "Interactive SoLE cooperation partner map for TYPO3",
+    "license": "proprietary",
+    "require": {
+        "typo3/cms-core": "^12.4 || ^13.4",
+        "typo3/cms-extbase": "^12.4 || ^13.4",
+        "typo3/cms-fluid": "^12.4 || ^13.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "PhLudwigsburg\\SoleMap\\": "Classes/"
+        }
+    },
+    "extra": {
+        "typo3/cms": {
+            "extension-key": "sole_map"
+        }
+    }
+}

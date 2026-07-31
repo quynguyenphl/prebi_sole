@@ -1,0 +1,48 @@
+<f:asset.css identifier="sole-map-leaflet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
+<f:asset.css identifier="sole-map-cluster" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.1/MarkerCluster.min.css" />
+<f:asset.css identifier="sole-map-cluster-default" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.1/MarkerCluster.Default.min.css" />
+<f:asset.css identifier="sole-map-styles" href="{f:uri.resource(path: 'Css/sole-map.css', extensionName: 'SoleMap')}" />
+
+<div class="sole-map-app" data-csv-url="{f:uri.resource(path: 'Data/PraxisstellenSoLE_Karte.csv', extensionName: 'SoleMap')}">
+    <header class="sole-map-header">
+        <h2>PH Ludwigsburg - Kooperationspartner-Karte</h2>
+        <p>Interaktive Karte der Partnereinrichtungen und Kooperationen</p>
+    </header>
+
+    <div class="sole-map-search">
+        <input type="search" data-role="search" placeholder="Suche nach Namen, Adresse, Angebot..." aria-label="Karte durchsuchen">
+        <div class="sole-map-actions">
+            <button type="button" data-action="clear-search">Löschen</button>
+            <button type="button" data-action="export">Exportieren</button>
+            <button type="button" data-action="share">Teilen</button>
+        </div>
+    </div>
+
+    <div class="sole-map-layout">
+        <aside class="sole-map-sidebar" aria-label="Kartenfilter">
+            <section class="sole-map-filter">
+                <h3>Filter nach Kategorie</h3>
+                <div data-role="category-filters"></div>
+            </section>
+            <section class="sole-map-filter">
+                <h3>Filter nach SoLE-Kooperation</h3>
+                <div data-role="cooperation-filters"></div>
+            </section>
+            <div class="sole-map-filter-reset">
+                <button type="button" data-action="clear-filters">Alle Filter zurücksetzen</button>
+            </div>
+        </aside>
+        <div class="sole-map-canvas" data-role="map" aria-label="Karte der Kooperationspartner"></div>
+    </div>
+
+    <section class="sole-map-results">
+        <h3>Filterergebnisse</h3>
+        <div data-role="error" class="sole-map-error" hidden></div>
+        <div data-role="results" class="sole-map-results-list"></div>
+    </section>
+</div>
+
+<f:asset.script identifier="sole-map-leaflet" src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js" defer="true" />
+<f:asset.script identifier="sole-map-cluster" src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.1/leaflet.markercluster.min.js" defer="true" />
+<f:asset.script identifier="sole-map-papaparse" src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js" defer="true" />
+<f:asset.script identifier="sole-map-app" src="{f:uri.resource(path: 'JavaScript/sole-map.js', extensionName: 'SoleMap')}" defer="true" />

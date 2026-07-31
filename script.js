@@ -27,7 +27,9 @@ let currentSort = 'name'; // 'name', 'category', 'status'
 async function loadCSVData() {
     return new Promise((resolve, reject) => {
 
-        Papa.parse("PraxisstellenSoLE_Karte.csv", {
+        const csvUrl = document.querySelector('.sole-map-app')?.dataset.csvUrl || "PraxisstellenSoLE_Karte.csv";
+
+        Papa.parse(csvUrl, {
             download: true,
             header: true,
             delimiter: ";",
